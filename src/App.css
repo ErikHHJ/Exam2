@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bg-color: #f8f7f4;
+  --buttons-color: #ffd9ad;
+  --secondary-color: #4b544a;
+}
+.buttoncolor {
+  background-color: var(--buttons-color) !important;
+  color: black !important;
+}
+.secondarycolor {
+  color: var(--secondary-color) !important;
+}
+
+.buttoncolor:hover {
+  background-color: black !important;
+  color: var(--buttons-color) !important;
+}
+body {
+  background-color: var(--bg-color) !important;
+  font-family: "Poppins" !important;
+}
+main {
+  min-height: 100vh;
+}
+.headerfont {
+  font-family: "Playfair Display";
+}
+.bg {
+  margin: 0 auto;
+  max-width: 1400px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.maxwidth {
+  max-width: 1200px;
+}
+.litthoyre {
+  left: 55%;
+  top: 55%;
+}
+.w-70 {
+  width: 70%;
+}
+.h-70 {
+  height: 70%;
+}
+@media (max-width: 768px) {
+  .column {
+    flex-direction: column;
+  }
+  .litthoyre {
+    left: 0;
+    top: 0;
+  }
+  .bg-image .w-50 {
+  }
+  .bilder {
+    width: 100vh;
+  }
+}
