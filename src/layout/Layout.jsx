@@ -6,7 +6,7 @@ import "@fontsource/playfair-display/400-italic.css";
 export function Layout({ children }) {
   return (
     <>
-      <Navbar bg="transparent" expand="lg">
+      <Navbar className="borderbottom" bg="transparent" expand="lg">
         <Container>
           <Navbar.Brand>
             {" "}
@@ -25,11 +25,14 @@ export function Layout({ children }) {
             <Nav.Link as={Link} to="/manage" className="fs-4 fw-bold">
               Manage
             </Nav.Link>
+            <Nav.Link as={Link} to="/login" className="fs-4 fw-bold">
+              Login
+            </Nav.Link>
           </Nav>
         </Container>
       </Navbar>
       <main>{children}</main>
-      <footer className="border border-top-dark d-flex flex-row justify-content-center align-items-center">
+      <footer className="bordertop d-flex flex-row justify-content-center align-items-center">
         <div className="d-flex justify-content-center align-items-center p-5">
           <Logo />
         </div>

@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+header {
+  border-bottom: 2px solid var(--secondary-color);
+}
 :root {
   --bg-color: #f8f7f4;
   --buttons-color: #ffd9ad;
@@ -11,6 +14,9 @@
 .buttoncolor {
   background-color: var(--buttons-color) !important;
   color: black !important;
+}
+.bgcolor {
+  background-color: var(--bg-color) !important;
 }
 .secondarycolor {
   color: var(--secondary-color) !important;
@@ -32,7 +38,7 @@ main {
 }
 .bg {
   margin: 0 auto;
-  max-width: 1400px;
+  min-width: 100vw;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -51,6 +57,31 @@ main {
 .h-70 {
   height: 70%;
 }
+.sortbarsection {
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}
+
+.carousel-inner .carousel-item {
+  transition-duration: 0.3s;
+}
+.carousel-image {
+  width: 100%;
+  height: 30vh;
+}
+.borderbottom {
+  border-bottom: 2px solid var(--secondary-color);
+}
+.bordertop {
+  border-top: 2px solid var(--secondary-color);
+}
+.border {
+  border: 2px solid var(--secondary-color);
+}
+
 @media (max-width: 768px) {
   .column {
     flex-direction: column;
@@ -59,9 +90,8 @@ main {
     left: 0;
     top: 0;
   }
-  .bg-image .w-50 {
-  }
+
   .bilder {
-    width: 100vh;
+    display: none;
   }
 }

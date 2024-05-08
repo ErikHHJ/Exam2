@@ -1,16 +1,16 @@
-export function Logo(height, width) {
+export function Logo({ height, width }) {
   return (
-    <div style={{ height: { height }, width: { width } }} className="size">
+    <div style={{ height: height, width: width }} className="size">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
         width="100%"
         height="100%"
         viewBox="0 0 354.544 68.547"
       >
         <defs></defs>
         <g id="Group_3" data-name="Group 3" transform="translate(0 0)">
-          <g id="Group_1" data-name="Group 1" clip-path="url(#clip-path)">
+          <g id="Group_1" data-name="Group 1" clipPath="url(#clip-path)">
             <path
               id="Path_1"
               data-name="Path 1"
