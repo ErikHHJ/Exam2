@@ -15,8 +15,15 @@ header {
   background-color: var(--buttons-color) !important;
   color: black !important;
 }
+.noborder {
+  border: none !important;
+}
 .bgcolor {
   background-color: var(--bg-color) !important;
+}
+
+.red {
+  color: red !important;
 }
 .secondarycolor {
   color: var(--secondary-color) !important;
@@ -36,6 +43,17 @@ main {
 .headerfont {
   font-family: "Playfair Display";
 }
+hr {
+  border: none;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--buttons-color),
+    var(--secondary-color),
+    var(--bg-color)
+  );
+}
+
 .bg {
   margin: 0 auto;
   min-width: 100vw;
@@ -57,7 +75,10 @@ main {
 .h-70 {
   height: 70%;
 }
-.sortbarsection {
+.owneravatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
 }
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
@@ -80,6 +101,105 @@ main {
 }
 .border {
   border: 2px solid var(--secondary-color);
+}
+.round {
+  border-radius: 40px;
+  margin-top: 5px;
+}
+.specificimg {
+  width: auto;
+  height: 40vh;
+}
+/* Vibrant Colors For DatePicker */
+.vibrant-color-1 {
+  background-color: #ff5733;
+}
+.vibrant-color-2 {
+  background-color: #33ff57;
+}
+.vibrant-color-3 {
+  background-color: #5733ff;
+}
+.vibrant-color-4 {
+  background-color: #ff3357;
+}
+.vibrant-color-5 {
+  background-color: #33ffec;
+}
+.vibrant-color-6 {
+  background-color: #ecff33;
+}
+.vibrant-color-7 {
+  background-color: #b633ff;
+}
+.vibrant-color-8 {
+  background-color: #ff33e0;
+}
+.vibrant-color-9 {
+  background-color: #ffb933;
+}
+.vibrant-color-10 {
+  background-color: #33ecff;
+}
+.vibrant-color-11 {
+  background-color: #ff7f33;
+}
+.vibrant-color-12 {
+  background-color: #7fff33;
+}
+.vibrant-color-13 {
+  background-color: #337fff;
+}
+.vibrant-color-14 {
+  background-color: #ff33c1;
+}
+.vibrant-color-15 {
+  background-color: #33ff7f;
+}
+.vibrant-color-16 {
+  background-color: #7f33ff;
+}
+.vibrant-color-17 {
+  background-color: #ff5733;
+}
+.vibrant-color-18 {
+  background-color: #33ff57;
+}
+.vibrant-color-19 {
+  background-color: #5733ff;
+}
+.vibrant-color-20 {
+  background-color: #ff3357;
+}
+.vibrant-color-21 {
+  background-color: #33ffec;
+}
+.vibrant-color-22 {
+  background-color: #ecff33;
+}
+.vibrant-color-23 {
+  background-color: #b633ff;
+}
+.vibrant-color-24 {
+  background-color: #ff33e0;
+}
+.vibrant-color-25 {
+  background-color: #ffb933;
+}
+.vibrant-color-26 {
+  background-color: #33ecff;
+}
+.vibrant-color-27 {
+  background-color: #ff7f33;
+}
+.vibrant-color-28 {
+  background-color: #7fff33;
+}
+.vibrant-color-29 {
+  background-color: #337fff;
+}
+.vibrant-color-30 {
+  background-color: #ff33c1;
 }
 
 @media (max-width: 768px) {

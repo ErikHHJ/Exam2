@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Venues } from "./routes/Venues.jsx";
 import { Login } from "./routes/Login.jsx";
 import { Register } from "./routes/Register.jsx";
+import { SpecificVenue } from "./routes/SpecificVenue.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/:itemId",
+        element: <SpecificVenue />,
       },
     ],
   },

@@ -13,7 +13,8 @@ export function SendLogin(data) {
     fetch(url, options)
       .then((response) => response.json())
       .then((responseData) => {
-        localStorage.setItem("User", JSON.stringify(responseData.data));
+        localStorage.setItem("user", JSON.stringify(responseData.data));
+        window.location.href = "/";
       });
   } catch (error) {
     const loginError = document.querySelector(".loginerror");
