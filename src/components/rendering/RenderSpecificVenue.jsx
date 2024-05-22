@@ -1,10 +1,11 @@
-import { Card, Carousel } from "react-bootstrap";
+import { Button, Card, Carousel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaXmark } from "react-icons/fa6";
 import { FcCheckmark } from "react-icons/fc";
 import { StarDisplay } from "../StarDisplay.jsx";
 import { IoIosPin } from "react-icons/io";
 import { AvailabilityPicker } from "../datePickers/AvailabilityPicker.jsx";
+import { BookingPicker } from "../datePickers/BookingPicker.jsx";
 
 export function RenderSpecificVenue({ venue }) {
   if (!venue) {
@@ -90,14 +91,16 @@ export function RenderSpecificVenue({ venue }) {
           <div className="d-flex flex-row align-items-center justify-content-space-between gap-5">
             <div className="d-flex flex-column align-items-center justify-content-center gap-2">
               <p className="fs-4 m-0 text-break">"{description}"</p>
-              <div className="p-4 d-flex flex-row align-items-center justify-content-center">
-                <img
-                  className="owneravatar"
-                  src={owner.avatar.url}
-                  alt={owner.name + "'s avatar"}
-                />
-                <p className="fs-2 m-0">{owner.name} - Is the host</p>
-              </div>
+              <Link to={`/profile/${owner.name}`}>
+                <div className="p-4 d-flex flex-row align-items-center justify-content-center">
+                  <img
+                    className="owneravatar"
+                    src={owner.avatar.url}
+                    alt={owner.name + "'s avatar"}
+                  />
+                  <p className="fs-2 m-0">{owner.name} - Is the host</p>
+                </div>
+              </Link>
             </div>
           </div>
           <hr className="w-100 m-5" />
@@ -140,9 +143,10 @@ export function RenderSpecificVenue({ venue }) {
             </div>
           </div>
           <hr className="text-black w-100 m-5" />
-          <div>
+          <div className="d-flex flex-column align-items-center justify-content-center">
             <h3>Check Availability</h3>
             <AvailabilityPicker bookings={bookings} />
+            <BookingPicker bookings={bookings} />
           </div>
         </div>
       </div>

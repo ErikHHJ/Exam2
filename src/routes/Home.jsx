@@ -18,9 +18,11 @@ export function Home() {
           <h1 className="headerfont fs-1 text-white fw-bold text-center mb-3">
             Starts Here
           </h1>
-          <Button variant="" className="buttoncolor rounded">
-            Start planning
-          </Button>
+          <Link to={"/venues"}>
+            <Button variant="" className="buttoncolor rounded w-100">
+              Start planning
+            </Button>
+          </Link>
         </div>
       </div>
       <div className="d-flex justify-content-center align-items-center p-5 vh-100 column">
@@ -39,7 +41,7 @@ export function Home() {
         </div>
         <div className="d-flex justify-content-center w-50 h-70 p-5 bilder">
           <div
-            className="bg-image w-100 h-100"
+            className="bg-image w-100 h-100 "
             style={{
               backgroundImage: `url(${image2})`,
 

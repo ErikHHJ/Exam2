@@ -8,6 +8,8 @@ import { Venues } from "./routes/Venues.jsx";
 import { Login } from "./routes/Login.jsx";
 import { Register } from "./routes/Register.jsx";
 import { SpecificVenue } from "./routes/SpecificVenue.jsx";
+import { SpecificProfile } from "./routes/SpecificProfile.jsx";
+import { Success } from "./routes/Success.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,8 +33,16 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
+        path: "/success",
+        element: <Success />,
+      },
+      {
         path: "/:itemId",
         element: <SpecificVenue />,
+      },
+      {
+        path: "/profile/:profileName",
+        element: <SpecificProfile />,
       },
     ],
   },

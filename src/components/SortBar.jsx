@@ -7,7 +7,7 @@ export function SortBar({ filters, onFilterChange }) {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column col-12 col-md-8 p-4 round bg-white">
+    <div className="d-flex justify-content-center align-items-center flex-column col-12 col-md-8 p-4 round bg-white shadow mb-2">
       <h2 className="border-bottom">Where would you like to go?</h2>
       <Form className="sortbar d-flex flex-row justify-content-evenly gap-3">
         <Form.Group>
