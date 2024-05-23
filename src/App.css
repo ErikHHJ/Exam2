@@ -130,6 +130,9 @@ hr {
   max-height: 200px !important;
   height: 100%;
 }
+.bookingimg {
+  max-height: 400px !important;
+}
 
 @media (max-width: 768px) {
   .column {
