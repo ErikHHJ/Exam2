@@ -60,7 +60,7 @@ export function Layout({ children }) {
               <Nav.Link
                 style={{ color: isLoggedIn ? "red" : "lightgreen" }}
                 onClick={handleLoginClick}
-                className="fs-4 fw-bold"
+                className="fs-4 m-1 fw-bold"
               >
                 {loginText}
               </Nav.Link>
