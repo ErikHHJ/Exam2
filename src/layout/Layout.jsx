@@ -9,17 +9,13 @@ export function Layout({ children }) {
   const userItem = JSON.parse(localStorage.getItem("user"));
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (userItem) {
       setIsLoggedIn(true);
     }
-  }, []);
+  }, [userItem]);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      setLoginText("Logout");
-    } else {
-      setLoginText("Login");
-    }
+    setLoginText(isLoggedIn ? "Logout" : "Login");
   }, [isLoggedIn]);
 
   const handleLoginClick = () => {
@@ -41,24 +37,23 @@ export function Layout({ children }) {
               <Logo />
             </Link>
           </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />{" "}
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            {" "}
             <Nav className="ms-auto">
-              {" "}
-              <Nav.Link as={Link} to="/dashboard" className="fs-4 fw-bold">
-                Dashboard
-              </Nav.Link>
-              <Nav.Link as={Link} to="/venues" className="fs-4 fw-bold">
-                Venues
-              </Nav.Link>
-              <Nav.Link
-                as={Link}
-                to={"/profile/" + userItem.name}
-                className="fs-4 fw-bold"
-              >
-                Profile
-              </Nav.Link>
+              {isLoggedIn && (
+                <>
+                  <Nav.Link as={Link} to="/dashboard" className="fs-4 fw-bold">
+                    Dashboard
+                  </Nav.Link>
+                  <Nav.Link
+                    as={Link}
+                    to={`/profile/${userItem.name}`}
+                    className="fs-4 fw-bold"
+                  >
+                    Profile
+                  </Nav.Link>
+                </>
+              )}
               <Nav.Link
                 style={{ color: isLoggedIn ? "red" : "lightgreen" }}
                 onClick={handleLoginClick}
