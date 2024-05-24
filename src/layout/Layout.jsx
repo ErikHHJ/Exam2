@@ -54,6 +54,9 @@ export function Layout({ children }) {
                   </Nav.Link>
                 </>
               )}
+              <Nav.Link as={Link} to={"/venues"} className="fs-4 fw-bold">
+                Venues
+              </Nav.Link>
               <Nav.Link
                 style={{ color: isLoggedIn ? "red" : "lightgreen" }}
                 onClick={handleLoginClick}
