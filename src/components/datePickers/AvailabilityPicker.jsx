@@ -6,7 +6,6 @@ import { eachDayOfInterval, parseISO } from "date-fns";
 export function AvailabilityPicker({ bookings }) {
   const [startDate, setStartDate] = useState(new Date());
 
-  // Helper function to generate an array of all booked dates
   const generateBookedDates = (bookings) => {
     let bookedDates = [];
 
@@ -15,7 +14,6 @@ export function AvailabilityPicker({ bookings }) {
       const start = parseISO(dateFrom);
       const end = parseISO(dateTo);
 
-      // Get all dates within the booking range
       const dates = eachDayOfInterval({ start, end });
       bookedDates = bookedDates.concat(dates);
     });

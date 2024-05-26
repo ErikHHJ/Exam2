@@ -60,7 +60,10 @@ export function RenderSpecificVenue({ venue }) {
     <div className="container">
       <div className="row">
         <div className="col-12 m-5 bgcolor noborder d-flex justify-content-center align-items-center flex-column">
-          <h1 className="fs-1">{name}</h1>
+          <h1 className="fs-1">
+            {name.length > 20 ? name.substring(0, 40) + "..." : name}
+          </h1>
+
           {Array.isArray(media) && media.length > 0 ? (
             <div className="d-flex w-100 gap-3 flex-wrap align-items-center justify-content-center">
               {media.map((image, index) => (

@@ -21,14 +21,17 @@ export function VenueCreationButton({ isVenueManager }) {
 
   return (
     <>
-      <Button variant="primary" onClick={handleShowModal}>
+      <Button
+        className="btn buttoncolor border-0 rounded"
+        onClick={handleShowModal}
+      >
         Create Venue
       </Button>
       {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <VenueCreationModal
         show={showModal}
         handleClose={handleCloseModal}
-        handleCreateVenue={SendVenue} // Passing SendVenue function as onSubmit handler
+        handleCreateVenue={SendVenue}
       />
     </>
   );

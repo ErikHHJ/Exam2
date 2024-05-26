@@ -1,6 +1,5 @@
 export function SendLogin(data) {
   try {
-    console.log(data);
     const url = "https://v2.api.noroff.dev/auth/login";
 
     const options = {
@@ -14,7 +13,8 @@ export function SendLogin(data) {
       .then((response) => response.json())
       .then((responseData) => {
         localStorage.setItem("user", JSON.stringify(responseData.data));
-        window.location.href = "/";
+        console.log("User logged in successfully:", responseData);
+        window.location.href = "/venues";
       });
   } catch (error) {
     const loginError = document.querySelector(".loginerror");

@@ -3,9 +3,15 @@ import { Button, Modal, Form } from "react-bootstrap";
 import { UpdateButton } from "../fetches/UpdateButton.jsx";
 import { VenueCreationButton } from "../VenueCreationButton.jsx";
 import { Link } from "react-router-dom";
+import { DeleteModal } from "../modals/DeleteModal.jsx";
+import { UpdateVenueModal } from "../modals/UpdateVenueModal.jsx";
 
 export function RenderSpecificProfile({ profile }) {
   const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showUpdateVenueModal, setShowUpdateVenueModal] = useState(false);
+  const [selectedVenue, setSelectedVenue] = useState(null);
+  const [selectedVenueId, setSelectedVenueId] = useState(null);
   const [formData, setFormData] = useState({
     bio: "",
     venueManager: false,
@@ -44,10 +50,24 @@ export function RenderSpecificProfile({ profile }) {
   };
 
   const handleCloseModal = () => setShowModal(false);
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleCloseUpdateVenueModal = () => setShowUpdateVenueModal(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleDelete = () => {
+    profileData.venues = profileData.venues.filter(
+      (venue) => venue.id !== selectedVenueId
+    );
+    setShowDeleteModal(false);
+  };
+
+  const handleUpdateVenue = (venue) => {
+    setSelectedVenue(venue);
+    setShowUpdateVenueModal(true);
   };
 
   const updatedProfileData = {
@@ -67,16 +87,27 @@ export function RenderSpecificProfile({ profile }) {
           alt="Profile avatar"
         />
         <h1 className="headerfont">{profileData.name}</h1>
+        <p>{bio}</p>
         <p className="text-muted">{profileData.email}</p>
-        <p className="text-muted">{managerStatus}</p>
+        <p className="text-muted d-flex flex-column align-items-center justify-content">
+          {managerStatus}
+          {isOwnProfile && profileData.venueManager && (
+            <Link to={"/manage"} className="btn buttoncolor border-0 rounded">
+              Manage venues
+            </Link>
+          )}
+        </p>
         <p className="text-muted">
           Venues: {venuesCount} <br />
           Bookings: {bookingsCount}
         </p>
         <div className="d-flex justify-content-center align-items-center flex-column">
-          <p>{bio}</p>
           {isOwnProfile && (
-            <Button variant="primary" onClick={handleEditProfile}>
+            <Button
+              className="btn buttoncolor border-0 rounded"
+              variant="primary"
+              onClick={handleEditProfile}
+            >
               Edit profile
             </Button>
           )}
@@ -91,9 +122,32 @@ export function RenderSpecificProfile({ profile }) {
           profileData.venues.map((venue, index) => (
             <div
               key={index}
-              className="w-75 d-flex flex-row align-items-start justify-content-between border shadow rounded m-3"
+              className="w-75 d-flex flex-row align-items-start justify-content-between border shadow rounded m-3 position-relative"
             >
-              <Link className="text-decoration-none w-100" to={`/${venue.id}`}>
+              {isOwnProfile && (
+                <div className="position-absolute top-0 end-0">
+                  <Button
+                    variant="warning"
+                    className="me-2"
+                    onClick={() => handleUpdateVenue(venue)}
+                  >
+                    Update
+                  </Button>
+                  <Button
+                    variant="danger"
+                    onClick={() => {
+                      setSelectedVenueId(venue.id);
+                      setShowDeleteModal(true);
+                    }}
+                  >
+                    Delete
+                  </Button>
+                </div>
+              )}
+              <Link
+                className="text-decoration-none w-100 text-black"
+                to={`/${venue.id}`}
+              >
                 <div className="w-100">
                   <img
                     src={
@@ -172,6 +226,19 @@ export function RenderSpecificProfile({ profile }) {
           <UpdateButton updatedProfileData={updatedProfileData} />
         </Modal.Footer>
       </Modal>
+
+      <DeleteModal
+        show={showDeleteModal}
+        handleClose={handleCloseDeleteModal}
+        handleDelete={handleDelete}
+        venueId={selectedVenueId}
+      />
+
+      <UpdateVenueModal
+        show={showUpdateVenueModal}
+        handleClose={handleCloseUpdateVenueModal}
+        venue={selectedVenue}
+      />
     </div>
   );
 }

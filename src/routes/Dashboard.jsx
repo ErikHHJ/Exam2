@@ -45,13 +45,9 @@ export function DashBoard() {
     <div className="container d-flex flex-column justify-content-center align-items-center">
       <h1 className="headerfont text-decoration-underline">Dashboard</h1>
       <div className="w-100 d-flex justify-content-center align-items-center flex-row gap-1">
-        <div className="w-50">
-          <h2>Upcoming trips</h2>
-          {profile && profile.data.bookings && (
-            <RenderBookings bookings={profile.data.bookings} />
-          )}
-        </div>
-        <div className="w-50"></div>
+        {profile && profile.data.bookings && (
+          <RenderBookings bookings={profile.data.bookings} />
+        )}
       </div>
     </div>
   );

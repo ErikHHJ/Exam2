@@ -22,7 +22,6 @@ export function UpdateButton({ updatedProfileData }) {
         venueManager: updatedProfileData.venueManager,
       };
 
-      // Validate URLs
       const validateUrl = (url) => {
         try {
           new URL(url);

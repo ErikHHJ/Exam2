@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form, Col, Row } from "react-bootstrap";
-import { SendVenue } from "../fetches/SendVenue.jsx";
+import { UpdateVenueButton } from "../fetches/UpdateVenueButton.jsx";
 
-export function VenueCreationModal({ show, handleClose }) {
+export function UpdateVenueModal({ show, handleClose, venue }) {
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -28,32 +28,32 @@ export function VenueCreationModal({ show, handleClose }) {
   });
 
   useEffect(() => {
-    if (!show) {
+    if (show && venue) {
       setFormData({
-        name: "",
-        description: "",
-        media: [{ url: "", alt: "" }],
-        price: 0,
-        maxGuests: 0,
-        rating: 0,
+        name: venue.name || "",
+        description: venue.description || "",
+        media: venue.media.length ? venue.media : [{ url: "", alt: "" }],
+        price: venue.price || 0,
+        maxGuests: venue.maxGuests || 0,
+        rating: venue.rating || 0,
         meta: {
-          wifi: false,
-          parking: false,
-          breakfast: false,
-          pets: false,
+          wifi: venue.meta?.wifi || false,
+          parking: venue.meta?.parking || false,
+          breakfast: venue.meta?.breakfast || false,
+          pets: venue.meta?.pets || false,
         },
         location: {
-          address: "",
-          city: "",
-          zip: "",
-          country: "",
-          continent: "",
-          lat: 0,
-          lng: 0,
+          address: venue.location?.address || "",
+          city: venue.location?.city || "",
+          zip: venue.location?.zip || "",
+          country: venue.location?.country || "",
+          continent: venue.location?.continent || "",
+          lat: venue.location?.lat || 0,
+          lng: venue.location?.lng || 0,
         },
       });
     }
-  }, [show]);
+  }, [show, venue]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,6 +83,16 @@ export function VenueCreationModal({ show, handleClose }) {
       },
     }));
   };
+  const handleMediaChange = (index, e) => {
+    const { name, value } = e.target;
+    const updatedMedia = [...formData.media];
+    const [field, mediaIndex, property] = name.split("-");
+    updatedMedia[mediaIndex][property] = value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      media: updatedMedia,
+    }));
+  };
 
   const handleAddImage = () => {
     setFormData((prevFormData) => ({
@@ -91,20 +101,18 @@ export function VenueCreationModal({ show, handleClose }) {
     }));
   };
 
-  const handleImageChange = (index, e) => {
-    const { value } = e.target;
-    const updatedMedia = [...formData.media];
-    updatedMedia[index].url = value;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      media: updatedMedia,
-    }));
+  const updatedVenueData = {
+    ...formData,
+    media: formData.media.map((item) => ({
+      ...item,
+      alt: item.alt || `Media for ${formData.name}`,
+    })),
   };
 
   return (
     <Modal show={show} onHide={handleClose} size="lg">
       <Modal.Header closeButton>
-        <Modal.Title>Create Venue</Modal.Title>
+        <Modal.Title>Update Venue</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -169,10 +177,20 @@ export function VenueCreationModal({ show, handleClose }) {
                     <Form.Label>Media URL</Form.Label>
                     <Form.Control
                       type="text"
-                      name="mediaUrl"
+                      name={`media-${index}-url`}
                       value={media.url}
-                      onChange={(e) => handleImageChange(index, e)}
+                      onChange={(e) => handleMediaChange(index, e)}
                       placeholder="Enter media URL"
+                    />
+                  </Form.Group>
+                  <Form.Group controlId={`formMediaAlt-${index}`}>
+                    <Form.Label>Media Alt</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name={`media-${index}-alt`}
+                      value={media.alt}
+                      onChange={(e) => handleMediaChange(index, e)}
+                      placeholder="Enter media alt text"
                     />
                   </Form.Group>
                 </div>
@@ -320,12 +338,13 @@ export function VenueCreationModal({ show, handleClose }) {
         <Button variant="secondary" onClick={handleClose}>
           Close
         </Button>
-        <Button
-          variant="primary"
-          onClick={() => SendVenue({ formData, handleClose })}
-        >
-          Create
-        </Button>
+        {venue && (
+          <UpdateVenueButton
+            venueId={venue.id}
+            updatedVenueData={updatedVenueData}
+            onUpdateSuccess={handleClose}
+          />
+        )}
       </Modal.Footer>
     </Modal>
   );

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RenderAllVenues } from "../components/rendering/RenderAllVenues";
 import { Spinner } from "react-bootstrap";
 import { SortBar } from "../components/SortBar";
@@ -39,56 +39,48 @@ export function Venues() {
   };
 
   const handleFilterVenues = () => {
-    const filteredVenues = venues.filter((venue) => {
-      const country = venue.country ? venue.country.toLowerCase() : "";
-      const amenities = venue.meta ? venue.meta : {};
+    setIsFiltering(true);
 
-      const matchesCountry = country.includes(filters.country.toLowerCase());
-
-      const accommodatesGuests =
-        parseInt(venue.maxGuests) >= parseInt(filters.guests);
-
+    let filteredVenues = venues.filter((venue) => {
+      const matchesCountry =
+        !filters.country ||
+        (venue.location.country &&
+          venue.location.country.toLowerCase() ===
+            filters.country.toLowerCase());
+      const meetsGuestsCriteria =
+        !filters.guests || venue.maxGuests >= parseInt(filters.guests);
+      const amenitiesMatch = Object.keys(filters.amenities).every(
+        (key) =>
+          !filters.amenities[key] || venue.meta[key] === filters.amenities[key]
+      );
       const isAvailable = !venue.bookings.some((booking) => {
         const bookingStart = new Date(booking.dateFrom);
         const bookingEnd = new Date(booking.dateTo);
         const checkInDate = new Date(filters.checkIn);
         const checkOutDate = new Date(filters.checkOut);
-
-        bookingStart.setUTCHours(0, 0, 0, 0);
-        bookingEnd.setUTCHours(0, 0, 0, 0);
-
-        return (
-          checkInDate.getTime() < bookingEnd.getTime() &&
-          checkOutDate.getTime() > bookingStart.getTime()
-        );
+        return checkInDate < bookingEnd && checkOutDate > bookingStart;
       });
 
-      const matchesAmenities =
-        amenities.wifi === filters.amenities.wifi &&
-        amenities.pets === filters.amenities.pets &&
-        amenities.parking === filters.amenities.parking &&
-        amenities.breakfast === filters.amenities.breakfast;
-
       return (
-        matchesCountry && accommodatesGuests && isAvailable && matchesAmenities
+        matchesCountry && meetsGuestsCriteria && amenitiesMatch && isAvailable
       );
     });
 
-    setIsFiltering(true);
+    filteredVenues.sort((a, b) => new Date(b.created) - new Date(a.created));
+    console.log("Filtered Venues:", filteredVenues);
+
     setDisplayedVenues(filteredVenues);
-    setItemsToShow(filteredVenues.length);
-    if (filteredVenues.length === 0) {
-      setError("No results found for the given criteria.");
-    } else {
-      setError(null);
-    }
+    setError(
+      filteredVenues.length > 0
+        ? null
+        : "No results found for the given criteria."
+    );
   };
 
-  const url =
-    "https://v2.api.noroff.dev/holidaze/venues?_bookings=true&limit=100";
-
   const fetchVenues = async (page) => {
-    const response = await fetch(`${url}&page=${page}`);
+    const response = await fetch(
+      `https://v2.api.noroff.dev/holidaze/venues?_bookings=true&limit=100&page=${page}`
+    );
     const data = await response.json();
     return data.data;
   };
@@ -102,7 +94,10 @@ export function Venues() {
 
       while (isFetching) {
         const newVenues = await fetchVenues(page);
-        allVenues = [...allVenues, ...newVenues];
+        const filteredNewVenues = newVenues.filter(
+          (venue) => venue.media.length > 0
+        );
+        allVenues = [...allVenues, ...filteredNewVenues];
         if (newVenues.length < 100) {
           isFetching = false;
         } else {
@@ -110,38 +105,45 @@ export function Venues() {
         }
       }
 
+      console.log("All Venues:", allVenues);
+      allVenues.sort((a, b) => new Date(b.created) - new Date(a.created));
       setVenues(allVenues);
-      setDisplayedVenues(allVenues.slice(0, 10));
+      setDisplayedVenues(
+        allVenues
+          .slice(0, itemsToShow)
+          .sort((a, b) => new Date(b.created) - new Date(a.created))
+      );
       setIsLoading(false);
-      console.log(allVenues);
     };
 
     fetchAllVenues();
   }, []);
-
-  const handleScroll = () => {
-    if (isFiltering) return;
-    const nearBottom =
-      window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
-    const hasMoreItemsToShow = itemsToShow < venues.length;
-
-    if (nearBottom && hasMoreItemsToShow) {
-      setItemsToShow((prevItemsToShow) =>
-        Math.min(prevItemsToShow + 10, venues.length)
-      );
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [itemsToShow, venues.length, isFiltering]);
 
   useEffect(() => {
     if (!isFiltering) {
       setDisplayedVenues(venues.slice(0, itemsToShow));
     }
   }, [itemsToShow, venues, isFiltering]);
+
+  useEffect(() => {
+    console.log("isFiltering changed:", isFiltering);
+
+    const handleScroll = () => {
+      const nearBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+
+      if (isFiltering && nearBottom) return;
+
+      if (nearBottom && itemsToShow < venues.length) {
+        setItemsToShow((prevItemsToShow) =>
+          Math.min(prevItemsToShow + 10, venues.length)
+        );
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [itemsToShow, venues.length, isFiltering]);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">

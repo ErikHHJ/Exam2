@@ -10,13 +10,11 @@ export async function SendVenue({ formData, handleClose }) {
 
     const userItem = JSON.parse(localStorage.getItem("user"));
 
-    // Ensure the media array is correctly structured
     const media = formData.media.map((mediaItem) => ({
       url: mediaItem.url,
       alt: mediaItem.alt,
     }));
 
-    // Structure location object
     const location = {
       address: formData.location.address || null,
       city: formData.location.city || null,
@@ -27,7 +25,6 @@ export async function SendVenue({ formData, handleClose }) {
       lng: parseFloat(formData.location.lng) || 0,
     };
 
-    // Create payload object
     const payload = {
       name: formData.name,
       description: formData.description,
@@ -49,15 +46,14 @@ export async function SendVenue({ formData, handleClose }) {
       body: JSON.stringify(payload),
     };
 
-    console.log("Data being sent:", payload); // Log the data being sent
+    console.log("Data being sent:", payload);
 
     const response = await fetch(url, options);
     const responseBody = await response.json();
 
     if (response.ok) {
-      // Venue created successfully
       console.log("Venue created successfully", responseBody);
-      handleClose(); // Close the modal after successful venue creation
+      handleClose();
     } else {
       console.error("Failed to create venue", responseBody);
       throw new Error(
@@ -66,6 +62,5 @@ export async function SendVenue({ formData, handleClose }) {
     }
   } catch (error) {
     console.error("Error creating venue:", error);
-    // Handle error, show error message to user, etc.
   }
 }
