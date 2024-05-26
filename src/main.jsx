@@ -11,6 +11,7 @@ import { SpecificVenue } from "./routes/SpecificVenue.jsx";
 import { SpecificProfile } from "./routes/SpecificProfile.jsx";
 import { Success } from "./routes/Success.jsx";
 import { DashBoard } from "./routes/Dashboard.jsx";
+import { Manage } from "./routes/Manage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashBoard />,
+      },
+      {
+        path: "/manage",
+        element: <Manage />,
       },
     ],
   },

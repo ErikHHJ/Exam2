@@ -51,11 +51,14 @@ export function RenderBookings({ bookings }) {
                 {calculateDaysDifference(booking.dateFrom)} days to go
               </div>
               <Card.Body>
-                <Card.Img
-                  className="bookingimg"
-                  variant="top"
-                  src={booking.venue.media[0].url}
-                />
+                <Link to={`/${booking.venue.id}`}>
+                  <Card.Img
+                    className="bookingimg"
+                    variant="top"
+                    src={booking.venue.media[0].url}
+                  />
+                </Link>
+
                 <Card.Title>{booking.venue.name}</Card.Title>
                 <Card.Text className="text-muted">
                   {booking.venue.location.address},{" "}
@@ -86,11 +89,13 @@ export function RenderBookings({ bookings }) {
                 {Math.abs(calculateDaysDifference(booking.dateTo))} days ago
               </div>
               <Card.Body>
-                <Card.Img
-                  className="bookingimg"
-                  variant="top"
-                  src={booking.venue.media[0].url}
-                />
+                <Link to={`/${booking.venue.id}`}>
+                  <Card.Img
+                    className="bookingimg"
+                    variant="top"
+                    src={booking.venue.media[0].url}
+                  />
+                </Link>
                 <Card.Title>{booking.venue.name}</Card.Title>
                 <Card.Text className="text-muted">
                   {booking.venue.location.address},{" "}

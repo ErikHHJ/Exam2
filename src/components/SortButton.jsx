@@ -13,7 +13,7 @@ export function SortButton({
     <Button
       onClick={handleClick}
       variant="primary"
-      className="buttoncolor border-0 rounded"
+      className="buttoncolor border-0 rounded mb-2"
     >
       Search Venues
     </Button>

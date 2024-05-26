@@ -27,7 +27,6 @@ export function PostBooking(data) {
         .then((response) => {
           if (response.ok) {
             window.location.href = "/success";
-            location.reload();
           } else {
             throw new Error("Failed to make the request");
           }
