@@ -36,7 +36,6 @@ export function SpecificProfile() {
       });
   }, [profileName]);
 
-  // Logging the profile after the fetch effect
   console.log(profile);
 
   return (

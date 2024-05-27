@@ -34,7 +34,7 @@ export function Layout({ children }) {
         <Container>
           <Navbar.Brand>
             <Link to="/">
-              <Logo />
+              <Logo width={"225px"} height={"60%"} />
             </Link>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -71,7 +71,7 @@ export function Layout({ children }) {
       <main>{children}</main>
       <footer className="bordertop d-flex flex-row justify-content-center align-items-center">
         <div className="d-flex justify-content-center align-items-center p-5">
-          <Logo />
+          <Logo width={"225px"} height={"60%"} />
         </div>
       </footer>
     </>

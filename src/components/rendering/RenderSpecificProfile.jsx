@@ -78,15 +78,15 @@ export function RenderSpecificProfile({ profile }) {
   };
 
   return (
-    <div className="container d-flex flex-wrap mt-3">
-      <div className="col-12 col-md-6 border d-flex flex-column justify-content-start align-items-center">
+    <div className="container d-flex flex-wrap mt-3 gap-3">
+      <div className="col-12 col-md-5 border d-flex flex-column justify-content-start align-items-center">
         <img className="banner w-100" src={bannerUrl} alt="Banner" />
         <img
           className="shadow profileavatar"
           src={avatarUrl}
           alt="Profile avatar"
         />
-        <h1 className="headerfont">{profileData.name}</h1>
+        <h1 className="headerfont mt-3">{profileData.name}</h1>
         <p>{bio}</p>
         <p className="text-muted">{profileData.email}</p>
         <p className="text-muted d-flex flex-column align-items-center justify-content">

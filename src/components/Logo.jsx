@@ -1,11 +1,11 @@
 export function Logo({ height, width }) {
   return (
-    <div style={{ height: height, width: width }} className="size">
+    <div style={{ height: height, width: width }}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
-        width="70%"
-        height="70%"
+        width={width}
+        height={height}
         viewBox="0 0 354.544 68.547"
       >
         <defs></defs>

@@ -106,6 +106,7 @@ hr {
 }
 .specificimg {
   width: auto;
+  max-width: 80%;
   height: 40vh;
 }
 .success {
@@ -145,9 +146,5 @@ hr {
 @media (max-width: 768px) {
   .column {
     flex-direction: column;
-  }
-
-  .sortbar {
-    flex-direction: column !important;
   }
 }
