@@ -143,7 +143,7 @@ export function UpdateVenueModal({ show, handleClose, venue }) {
                 />
               </Form.Group>
               <Form.Group controlId="formPrice">
-                <Form.Label>Price per night per person</Form.Label>
+                <Form.Label>Price per night</Form.Label>
                 <Form.Control
                   type="number"
                   name="price"

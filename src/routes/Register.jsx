@@ -19,7 +19,7 @@ export function Register() {
     if (form.checkValidity()) {
       let data = {
         name: username,
-        email: email,
+        email: email.toLowerCase(),
         password: password,
         bio: "",
         avatar: {
@@ -38,7 +38,7 @@ export function Register() {
 
       SendRegister(data)
         .then((responseData) => {
-          SendLogin((data = { email: data.email, password: data.password }));
+          SendLogin({ email: data.email, password: data.password });
           console.log("User registered successfully:", responseData);
         })
         .catch((error) => {
@@ -48,14 +48,13 @@ export function Register() {
       setValidated(true);
     } else {
       event.stopPropagation();
-
       setValidated(true);
     }
   };
 
   return (
     <div className="d-flex justify-content-center align-items-center vh-100 col-12">
-      <div className="d-flex flex-column justify-content-center align-items-center bgcolor border rounded col-12 col-md-8  p-5">
+      <div className="d-flex flex-column justify-content-center align-items-center bgcolor border rounded col-12 col-md-8 p-5">
         <h1 className="fs-1 headerfont mb-3 secondarycolor">
           Register an account
         </h1>
@@ -66,24 +65,27 @@ export function Register() {
           onSubmit={handleSubmit}
         >
           <Form.Group className="w-75" controlId="validationCustomUsername">
-            <FloatingLabel controlId="floatingUsername" label="Username">
+            <FloatingLabel
+              controlId="floatingUsername"
+              label="Username (required)"
+            >
               <Form.Control
                 required
                 type="text"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
+                minLength={8}
               />
               <Form.Control.Feedback type="invalid">
                 Must be at least 8 characters long
               </Form.Control.Feedback>
             </FloatingLabel>
-
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="w-75" controlId="validationCustomEmail">
-            <FloatingLabel controlId="floatingEmail" label="Email">
+            <FloatingLabel controlId="floatingEmail" label="Email (required)">
               <Form.Control
                 required
                 type="email"
@@ -93,23 +95,27 @@ export function Register() {
                 onChange={(e) => setEmail(e.target.value)}
               />
               <Form.Control.Feedback type="invalid">
-                Must be a valid noroff student email
+                Must be a valid Noroff student email
               </Form.Control.Feedback>
             </FloatingLabel>
             <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="w-75" controlId="validationCustomPassword">
-            <FloatingLabel controlId="floatingPassword" label="Password">
+            <FloatingLabel
+              controlId="floatingPassword"
+              label="Password (required)"
+            >
               <Form.Control
                 type="password"
                 placeholder="Password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                minLength={8}
               />
               <Form.Control.Feedback type="invalid">
-                Please enter a valid password.
+                Must be at least 8 characters long
               </Form.Control.Feedback>
             </FloatingLabel>
           </Form.Group>
@@ -137,7 +143,7 @@ export function Register() {
           </Form.Group>
 
           <Button className="m-3" type="submit">
-            Login
+            Register
           </Button>
           <p className="secondarycolor">
             Don't have a user yet? <Link to={"/register"}>Sign up</Link>

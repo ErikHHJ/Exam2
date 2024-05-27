@@ -47,9 +47,12 @@ export function RenderBookings({ bookings }) {
         ) : (
           sortedUpcomingBookings.map((booking) => (
             <Card key={booking.id} className="m-2 shadow position-relative">
-              <div className="days-counter position-absolute top-0 end-0 p-2 bg-info text-white rounded">
-                {calculateDaysDifference(booking.dateFrom)} days to go
-              </div>
+              {today >= new Date(booking.dateFrom) &&
+                today <= new Date(booking.dateTo) && (
+                  <div className="days-counter position-absolute top-0 end-0 p-2 bg-info text-white rounded">
+                    Ongoing
+                  </div>
+                )}
               <Card.Body>
                 <Link to={`/${booking.venue.id}`}>
                   <Card.Img

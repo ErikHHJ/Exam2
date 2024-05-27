@@ -43,7 +43,7 @@ export function Layout({ children }) {
               {isLoggedIn && (
                 <>
                   <Nav.Link as={Link} to="/dashboard" className="fs-4 fw-bold">
-                    Dashboard
+                    My bookings
                   </Nav.Link>
                   <Nav.Link
                     as={Link}
@@ -55,7 +55,7 @@ export function Layout({ children }) {
                 </>
               )}
               <Nav.Link as={Link} to={"/venues"} className="fs-4 fw-bold">
-                Venues
+                All Venues
               </Nav.Link>
               <Nav.Link
                 style={{ color: isLoggedIn ? "red" : "lightgreen" }}

@@ -3,11 +3,11 @@
   color: white;
 }
 .react-datepicker__day--highlighted-custom-2 {
-  background-color: #ffb399 !important;
+  background-color: #ff99e6 !important;
   color: white;
 }
 .react-datepicker__day--highlighted-custom-3 {
-  background-color: #ff33ff !important;
+  background-color: #00b3e6 !important;
   color: white;
 }
 .react-datepicker__day--highlighted-custom-4 {
@@ -15,7 +15,7 @@
   color: black;
 }
 .react-datepicker__day--highlighted-custom-5 {
-  background-color: #00b3e6 !important;
+  background-color: #99ff99 !important;
   color: white;
 }
 .react-datepicker__day--highlighted-custom-6 {
@@ -28,93 +28,5 @@
 }
 .react-datepicker__day--highlighted-custom-8 {
   background-color: #999966 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-9 {
-  background-color: #99ff99 !important;
-  color: black;
-}
-.react-datepicker__day--highlighted-custom-10 {
-  background-color: #b34d4d !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-11 {
-  background-color: #80b300 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-12 {
-  background-color: #809900 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-13 {
-  background-color: #e6b3b3 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-14 {
-  background-color: #6680b3 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-15 {
-  background-color: #66991a !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-16 {
-  background-color: #ff99e6 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-17 {
-  background-color: #ccff1a !important;
-  color: black;
-}
-.react-datepicker__day--highlighted-custom-18 {
-  background-color: #ff1a66 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-19 {
-  background-color: #e6331a !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-20 {
-  background-color: #33ffcc !important;
-  color: black;
-}
-.react-datepicker__day--highlighted-custom-21 {
-  background-color: #66994d !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-22 {
-  background-color: #b366cc !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-23 {
-  background-color: #4d8000 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-24 {
-  background-color: #b33300 !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-25 {
-  background-color: #cc80cc !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-26 {
-  background-color: #66664d !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-27 {
-  background-color: #991aff !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-28 {
-  background-color: #e666ff !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-29 {
-  background-color: #4db3ff !important;
-  color: white;
-}
-.react-datepicker__day--highlighted-custom-30 {
-  background-color: #1ab399 !important;
   color: white;
 }

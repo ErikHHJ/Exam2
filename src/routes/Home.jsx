@@ -1,7 +1,7 @@
 import image1 from "../images/image1.png";
 import image2 from "../images/image2.png";
 import image3 from "../images/image3.png";
-import { Button } from "react-bootstrap";
+import { Button, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export function Home() {
@@ -25,41 +25,49 @@ export function Home() {
           </Link>
         </div>
       </div>
-      <div className="d-flex justify-content-center align-items-center p-5 vh-100 column">
-        <div className="d-flex flex-column justify-content-center align-items-center">
-          <h2 className="headerfont mb-3 secondarycolor">
-            Living accommodations around the globe
-          </h2>
-          <p className="mb-3 secondarycolor">
-            Experience our accommodations in all types of environments
-          </p>
-          <Link to="/venues">
-            <Button variant="" className="buttoncolor">
-              Explore
-            </Button>
-          </Link>
-        </div>
-        <div className="d-flex justify-content-center w-50 h-70 p-5 bilder">
-          <div
-            className="bg-image w-100 h-100 "
-            style={{
-              backgroundImage: `url(${image2})`,
-
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
-          >
-            <div
-              className="bg-image w-50 h-50 position-relative litthoyre"
-              style={{
-                backgroundImage: `url(${image3})`,
-
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            ></div>
-          </div>
-        </div>
+      <div className="p-5">
+        <Row className="justify-content-center align-items-center">
+          <Col md={6} className="text-center">
+            <div className="mb-3">
+              <h2 className="headerfont secondarycolor fs-2 fs-sm-4">
+                Living accommodations around the globe
+              </h2>
+              <p className="secondarycolor">
+                Experience our accommodations in all types of environments
+              </p>
+            </div>
+            <Link to="/venues">
+              <Button variant="" className="buttoncolor">
+                Explore
+              </Button>
+            </Link>
+          </Col>
+          <Col md={6} className="p-0">
+            <Row className="g-0">
+              <Col xs={6} className="p-2 position-relative">
+                <img
+                  src={image2}
+                  className="img-fluid w-100"
+                  alt="Accommodation 1"
+                />
+                <div
+                  className="position-absolute top-50 start-50 translate-middle"
+                  style={{ zIndex: 1 }}
+                >
+                  <img
+                    src={image3}
+                    className="img-fluid"
+                    alt="Accommodation 2"
+                    style={{ width: "50%" }}
+                  />
+                </div>
+              </Col>
+              <Col xs={6} className="p-2">
+                <img src={image3} className="img-fluid" alt="Accommodation 2" />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </div>
     </>
   );

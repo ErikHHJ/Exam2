@@ -4,7 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 import { FcCheckmark } from "react-icons/fc";
 import { StarDisplay } from "../StarDisplay.jsx";
 import { IoIosPin } from "react-icons/io";
-import { AvailabilityPicker } from "../datePickers/AvailabilityPicker.jsx";
+
 import { BookingPicker } from "../datePickers/BookingPicker.jsx";
 
 export function RenderSpecificVenue({ venue }) {
@@ -59,7 +59,7 @@ export function RenderSpecificVenue({ venue }) {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12 m-5 bgcolor noborder d-flex justify-content-center align-items-center flex-column">
+        <div className="col-12  bgcolor noborder d-flex justify-content-center align-items-center flex-column">
           <h1 className="fs-1">
             {name.length > 20 ? name.substring(0, 40) + "..." : name}
           </h1>
@@ -147,9 +147,9 @@ export function RenderSpecificVenue({ venue }) {
           </div>
           <hr className="text-black w-100 m-5" />
           <div className="d-flex flex-column align-items-center justify-content-center">
-            <h3>Check Availability</h3>
-            <AvailabilityPicker bookings={bookings} />
-            <BookingPicker bookings={bookings} />
+            <h3>Ready to book?</h3>
+
+            <BookingPicker bookings={bookings} maxGuests={maxGuests} />
           </div>
         </div>
       </div>

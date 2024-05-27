@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, InputGroup } from "react-bootstrap";
+import { Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { SendLogin } from "../components/fetches/SendLogin.jsx";
 
@@ -7,17 +7,18 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
+  const [loginError, setLoginError] = useState("");
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
     if (form.checkValidity()) {
       let data = {
-        email: email,
+        email: email.toLowerCase(),
         password: password,
       };
 
-      SendLogin(data);
+      SendLogin(data, setLoginError);
     } else {
       event.preventDefault();
       event.stopPropagation();
@@ -74,9 +75,12 @@ export function Login() {
           <p className="secondarycolor">
             Don't have a user yet? <Link to={"/register"}>Sign up</Link>
           </p>
-          <Form.Control.Feedback className="loginerror" type="invalid">
-            Something went wrong with the login
-          </Form.Control.Feedback>
+
+          {loginError && (
+            <Alert variant="danger" className="mt-3">
+              {loginError}
+            </Alert>
+          )}
         </Form>
       </div>
     </div>

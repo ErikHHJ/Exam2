@@ -2,8 +2,18 @@ import React, { useState } from "react";
 import { Form, Dropdown } from "react-bootstrap";
 
 export function SortBar({ filters, onFilterChange }) {
-  const handleCheckboxChange = (setter) => (e) => {
-    setter(e.target.checked);
+  const [minCheckoutDate, setMinCheckoutDate] = useState("");
+
+  const handleDateChange = (field) => (dateValue) => {
+    const date = new Date(dateValue);
+    date.setHours(21, 0, 0, 0);
+    onFilterChange(field)(date.toISOString());
+
+    if (field === "checkIn") {
+      const minDate = new Date(dateValue);
+      minDate.setDate(minDate.getDate() + 1);
+      setMinCheckoutDate(minDate.toISOString().split("T")[0]);
+    }
   };
 
   return (
@@ -31,19 +41,20 @@ export function SortBar({ filters, onFilterChange }) {
         <Form.Group>
           <Form.Control
             required
-            type="datetime-local"
-            placeholder="CheckIn"
-            value={filters.checkIn}
-            onChange={(e) => onFilterChange("checkIn")(e.target.value)}
+            type="date"
+            placeholder="Check-In"
+            value={filters.checkIn.split("T")[0]}
+            onChange={(e) => handleDateChange("checkIn")(e.target.value)}
           />
         </Form.Group>
         <Form.Group>
           <Form.Control
             required
-            type="datetime-local"
-            placeholder="CheckOut"
-            value={filters.checkOut}
-            onChange={(e) => onFilterChange("checkOut")(e.target.value)}
+            type="date"
+            placeholder="Check-Out"
+            value={filters.checkOut.split("T")[0]}
+            min={minCheckoutDate}
+            onChange={(e) => handleDateChange("checkOut")(e.target.value)}
           />
         </Form.Group>
         <Form.Group>
@@ -86,7 +97,7 @@ export function SortBar({ filters, onFilterChange }) {
                 <Form.Check
                   type="checkbox"
                   id="breakfast"
-                  label="breakfast"
+                  label="Breakfast"
                   checked={filters.amenities.breakfast}
                   onChange={(e) =>
                     onFilterChange("breakfast")(e.target.checked)
