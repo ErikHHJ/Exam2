@@ -8,8 +8,7 @@ export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-  const [avatarUrl, setAvatarUrl] = useState("");
-  const [bannerUrl, setBannerUrl] = useState("");
+
   const [validated, setValidated] = useState(false);
 
   const handleSubmit = (event) => {
@@ -23,15 +22,11 @@ export function Register() {
         password: password,
         bio: "",
         avatar: {
-          url:
-            avatarUrl ||
-            "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
+          url: "https://static.vecteezy.com/system/resources/thumbnails/001/840/618/small/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-free-vector.jpg",
           alt: username + "'s avatar",
         },
         banner: {
-          url:
-            bannerUrl ||
-            "https://tinkercademy.com/wp-content/uploads/2017/04/Generic-Banner-05-Android-Dev.png",
+          url: "https://tinkercademy.com/wp-content/uploads/2017/04/Generic-Banner-05-Android-Dev.png",
           alt: username + "'s banner",
         },
       };
@@ -117,28 +112,6 @@ export function Register() {
               <Form.Control.Feedback type="invalid">
                 Must be at least 8 characters long
               </Form.Control.Feedback>
-            </FloatingLabel>
-          </Form.Group>
-
-          <Form.Group className="w-75" controlId="validationCustomAvatar">
-            <FloatingLabel controlId="floatingAvatar" label="Avatar url">
-              <Form.Control
-                type="text"
-                placeholder="Avatar URL"
-                value={avatarUrl}
-                onChange={(e) => setAvatarUrl(e.target.value)}
-              />
-            </FloatingLabel>
-          </Form.Group>
-
-          <Form.Group className="w-75" controlId="validationCustomBanner">
-            <FloatingLabel controlId="floatingBanner" label="Banner url">
-              <Form.Control
-                type="text"
-                placeholder="Banner URL"
-                value={bannerUrl}
-                onChange={(e) => setBannerUrl(e.target.value)}
-              />
             </FloatingLabel>
           </Form.Group>
 

@@ -27,11 +27,11 @@ export function Login() {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 col-12">
-      <div className="d-flex flex-column justify-content-center align-items-center bgcolor border rounded w-50 p-5">
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <div className=" d-flex flex-column justify-content-center align-items-center bgcolor w-100 p-5 col-12 col-md-8">
         <h2 className="fs-1 headerfont mb-3 secondarycolor">Log In</h2>
         <Form
-          className="col-8 d-flex flex-column justify-content-center align-items-center"
+          className="col-12 col-md-8  d-flex flex-column justify-content-center align-items-center"
           noValidate
           validated={validated}
           onSubmit={handleSubmit}

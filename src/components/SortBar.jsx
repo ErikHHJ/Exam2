@@ -17,7 +17,7 @@ export function SortBar({ filters, onFilterChange }) {
   };
 
   return (
-    <div className="d-flex justify-content-center align-items-center flex-column col-10  p-4 round bg-white shadow mb-2">
+    <div className="d-flex justify-content-center align-items-center flex-column col-10 p-4 round bg-white shadow mb-2">
       <h2 className="border-bottom">Where to?</h2>
       <Form className="d-flex flex-column flex-lg-row sortbar justify-content-evenly gap-3">
         <Form.Group>
@@ -26,6 +26,7 @@ export function SortBar({ filters, onFilterChange }) {
             type="number"
             placeholder="# of guests"
             value={filters.guests}
+            min={1} // Add the min attribute here
             onChange={(e) => onFilterChange("guests")(e.target.value)}
           />
         </Form.Group>
