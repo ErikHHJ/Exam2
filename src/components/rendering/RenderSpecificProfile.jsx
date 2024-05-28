@@ -91,11 +91,13 @@ export function RenderSpecificProfile({ profile }) {
         <p className="text-muted">{profileData.email}</p>
         <p className="text-muted d-flex flex-column align-items-center justify-content">
           {managerStatus}
-          {isOwnProfile && profileData.venueManager && (
-            <Link to={"/manage"} className="btn buttoncolor border-0 rounded">
-              Manage venues
-            </Link>
-          )}
+          {isOwnProfile &&
+            profileData.venueManager &&
+            profileData.venues.length > 0 && (
+              <Link to={"/manage"} className="btn buttoncolor border-0 rounded">
+                Manage venues
+              </Link>
+            )}
         </p>
         <p className="text-muted">
           Venues: {venuesCount} <br />

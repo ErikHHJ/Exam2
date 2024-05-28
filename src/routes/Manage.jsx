@@ -13,7 +13,9 @@ export function Manage() {
   const [noBookingsMessage, setNoBookingsMessage] = useState("");
 
   const url = `https://v2.api.noroff.dev/holidaze/profiles/${userItem.name}?_venues=true`;
-
+  useEffect(() => {
+    document.title = "Holidaze | Manage";
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       const options = {
@@ -24,9 +26,6 @@ export function Manage() {
           "X-Noroff-API-Key": ApiKey,
         },
       };
-      useEffect(() => {
-        document.title = "Holidaze | Manage";
-      }, []);
 
       try {
         const response = await fetch(url, options);

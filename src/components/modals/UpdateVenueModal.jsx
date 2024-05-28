@@ -136,7 +136,7 @@ export function UpdateVenueModal({ show, handleClose, venue }) {
                 />
               </Form.Group>
               <Form.Group controlId="formPrice">
-                <Form.Label>Price per night</Form.Label>
+                <Form.Label>Price per night (Max 10 000)</Form.Label>
                 <Form.Control
                   type="number"
                   name="price"
@@ -147,7 +147,7 @@ export function UpdateVenueModal({ show, handleClose, venue }) {
                 />
               </Form.Group>
               <Form.Group controlId="formMaxGuests">
-                <Form.Label>Max Guests</Form.Label>
+                <Form.Label>Max Guests (Max 100)</Form.Label>
                 <Form.Control
                   type="number"
                   name="maxGuests"
@@ -304,7 +304,7 @@ export function UpdateVenueModal({ show, handleClose, venue }) {
                 />
               </Form.Group>
               <Form.Group controlId="formLocationLat">
-                <Form.Label>Latitude</Form.Label>
+                <Form.Label>Latitude (-90 to 90)</Form.Label>
                 <Form.Control
                   type="number"
                   name="lat"
@@ -314,7 +314,7 @@ export function UpdateVenueModal({ show, handleClose, venue }) {
                 />
               </Form.Group>
               <Form.Group controlId="formLocationLng">
-                <Form.Label>Longitude</Form.Label>
+                <Form.Label>Longitude (-180 to 180)</Form.Label>
                 <Form.Control
                   type="number"
                   name="lng"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Button, InputGroup, FloatingLabel } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { SendRegister } from "../components/fetches/SendRegister.jsx";
@@ -118,7 +118,7 @@ export function Register() {
             </FloatingLabel>
           </Form.Group>
 
-          <Button className="m-3" type="submit">
+          <Button className="buttoncolor rounded  noborder m-3" type="submit">
             Register
           </Button>
           <p className="secondarycolor">
