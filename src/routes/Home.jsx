@@ -3,6 +3,7 @@ import image2 from "../images/image2.png";
 import image3 from "../images/image3.png";
 import { Button, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export function Home() {
   useEffect(() => {
