@@ -1,5 +1,6 @@
 import { Button } from "react-bootstrap";
 import { IoIosCheckmark } from "react-icons/io";
+import { useEffect } from "react";
 export function Success() {
   useEffect(() => {
     document.title = "Holidaze | Success!";
