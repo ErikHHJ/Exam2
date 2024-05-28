@@ -28,7 +28,7 @@ export function RenderSpecificVenue({ venue }) {
     maxGuests,
     bookings,
   } = venue.data;
-  console.log(venue.data);
+
   let locationString = "";
 
   if (location.continent) {

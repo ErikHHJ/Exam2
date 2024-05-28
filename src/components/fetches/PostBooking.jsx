@@ -11,7 +11,6 @@ export function PostBooking(data) {
       const url = "https://v2.api.noroff.dev/holidaze/bookings";
 
       const userItem = JSON.parse(localStorage.getItem("user"));
-      console.log(userItem.accessToken);
 
       const options = {
         method: "POST",

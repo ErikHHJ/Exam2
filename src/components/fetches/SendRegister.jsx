@@ -16,7 +16,7 @@ export async function SendRegister(data) {
       throw new Error("Failed to register user");
     }
     const responseData = await response.json();
-    console.log("User registered successfully:", responseData);
+
     return responseData;
   } catch (error) {
     console.error("Error occurred during registration:", error);

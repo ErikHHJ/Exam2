@@ -67,7 +67,6 @@ export function Venues() {
     });
 
     filteredVenues.sort((a, b) => new Date(b.created) - new Date(a.created));
-    console.log("Filtered Venues:", filteredVenues);
 
     setDisplayedVenues(filteredVenues);
     setError(
@@ -127,8 +126,6 @@ export function Venues() {
     document.title = "Holidaze | All venues";
   }, []);
   useEffect(() => {
-    console.log("isFiltering changed:", isFiltering);
-
     const handleScroll = () => {
       const nearBottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;

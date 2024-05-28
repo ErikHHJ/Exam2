@@ -19,7 +19,7 @@ export function SendLogin(data, setError) {
     .then((responseData) => {
       if (responseData && responseData.data) {
         localStorage.setItem("user", JSON.stringify(responseData.data));
-        console.log("User logged in successfully:", responseData);
+
         window.location.href = "/venues";
       } else {
         throw new Error("Invalid response data");

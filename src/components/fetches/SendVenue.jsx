@@ -3,8 +3,6 @@ import { Button } from "react-bootstrap";
 import { ApiKey } from "./ApiKey.jsx";
 
 export async function SendVenue({ formData, handleClose }) {
-  console.log("Form Data:", formData);
-
   try {
     const url = "https://v2.api.noroff.dev/holidaze/venues";
 
@@ -46,13 +44,10 @@ export async function SendVenue({ formData, handleClose }) {
       body: JSON.stringify(payload),
     };
 
-    console.log("Data being sent:", payload);
-
     const response = await fetch(url, options);
     const responseBody = await response.json();
 
     if (response.ok) {
-      console.log("Venue created successfully", responseBody);
       handleClose();
     } else {
       console.error("Failed to create venue", responseBody);

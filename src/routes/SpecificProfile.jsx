@@ -36,7 +36,6 @@ export function SpecificProfile() {
       });
   }, [profileName]);
 
-  console.log(profile);
   useEffect(() => {
     document.title = "Holidaze | Profile: " + profileName;
   }, []);

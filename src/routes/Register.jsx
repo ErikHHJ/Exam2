@@ -37,7 +37,6 @@ export function Register() {
       SendRegister(data)
         .then((responseData) => {
           SendLogin({ email: data.email, password: data.password });
-          console.log("User registered successfully:", responseData);
         })
         .catch((error) => {
           console.error("Error occurred during registration:", error);

@@ -49,8 +49,6 @@ export function UpdateButton({ updatedProfileData }) {
         body: JSON.stringify(structuredData),
       };
 
-      console.log("Request options:", options);
-
       const response = await fetch(url, options);
       if (response.ok) {
         window.location.href = "/success";
