@@ -204,7 +204,7 @@ export function RenderSpecificProfile({ profile }) {
               <Form.Control
                 type="text"
                 name="banner"
-                value={formData.banner}
+                placeholder={formData.banner}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -213,7 +213,7 @@ export function RenderSpecificProfile({ profile }) {
               <Form.Control
                 type="text"
                 name="avatar"
-                value={formData.avatar}
+                placeholder={formData.avatar}
                 onChange={handleChange}
               />
             </Form.Group>

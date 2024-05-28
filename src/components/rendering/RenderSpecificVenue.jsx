@@ -58,6 +58,7 @@ export function RenderSpecificVenue({ venue }) {
       locationString += `, ${location.address}`;
     }
   }
+
   const handleProfileClick = (e) => {
     if (!userItem) {
       e.preventDefault();
@@ -65,11 +66,13 @@ export function RenderSpecificVenue({ venue }) {
     }
   };
 
+  const isOwner = userItem && userItem.name === owner.name;
+
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12  bgcolor noborder d-flex justify-content-center align-items-center flex-column">
-          <h1 className="fs-2  mt-5">
+        <div className="col-12 bgcolor noborder d-flex justify-content-center align-items-center flex-column">
+          <h1 className="fs-2 mt-5">
             {name.length > 20 ? name.substring(0, 40) + "..." : name}
           </h1>
 
@@ -169,11 +172,12 @@ export function RenderSpecificVenue({ venue }) {
             </div>
           </div>
           <hr className="text-black w-100 m-5" />
-          <div className="d-flex flex-column align-items-center justify-content-center">
-            <h3>Ready to book?</h3>
-
-            <BookingPicker bookings={bookings} maxGuests={maxGuests} />
-          </div>
+          {!isOwner && (
+            <div className="d-flex flex-column align-items-center justify-content-center">
+              <h3>Ready to book?</h3>
+              <BookingPicker bookings={bookings} maxGuests={maxGuests} />
+            </div>
+          )}
         </div>
       </div>
     </div>

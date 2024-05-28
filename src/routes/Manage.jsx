@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Modal } from "react-bootstrap";
 import DatePicker from "react-datepicker";
-
 import "../components/datePickers/custom-datepicker.css";
-
 import { ApiKey } from "../components/fetches/ApiKey";
 
 export function Manage() {
@@ -121,115 +119,164 @@ export function Manage() {
     }
   }
 
+  const renderBookingStatus = (bookings) => {
+    const currentDate = new Date();
+    currentDate.setUTCHours(0, 0, 0, 0);
+
+    const sortedBookings = bookings.sort(
+      (a, b) => new Date(a.dateFrom) - new Date(b.dateFrom)
+    );
+
+    const currentBookings = [];
+    const futureBookings = [];
+    const pastBookings = [];
+
+    sortedBookings.forEach((booking) => {
+      const checkInDate = new Date(booking.dateFrom);
+      const checkOutDate = new Date(booking.dateTo);
+
+      if (currentDate >= checkInDate && currentDate <= checkOutDate) {
+        currentBookings.push(booking);
+      } else if (currentDate < checkInDate) {
+        futureBookings.push(booking);
+      } else {
+        pastBookings.push(booking);
+      }
+    });
+
+    return (
+      <div className="w-100 p-4 border d-flex flex-column align-items-center rounded justify-content-start mt-2">
+        <h3>Booking status</h3>
+        {currentBookings.length === 0 &&
+        futureBookings.length === 0 &&
+        pastBookings.length === 0 ? (
+          <p>No bookings yet. Let's hope someone discovers it!</p>
+        ) : (
+          <>
+            {currentBookings.length > 0 && (
+              <>
+                <h4>Current Bookings</h4>
+                {currentBookings.map((booking, index) => (
+                  <Card key={index} className="mb-2 w-75">
+                    <Card.Body>
+                      <Card.Img
+                        variant="top"
+                        src={booking.customer.avatar.url}
+                        className="rounded-circle"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          margin: "10px auto",
+                        }}
+                      />
+                      <Card.Title>{booking.customer.name}</Card.Title>
+                      <Card.Text>{booking.customer.email}</Card.Text>
+                      <Card.Text className="fw-bold">
+                        Currently in the venue - (Checks out on{" "}
+                        {new Date(booking.dateTo).toLocaleDateString("nb-NO")})
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </>
+            )}
+
+            {futureBookings.length > 0 && (
+              <>
+                <h4>Upcoming Bookings</h4>
+                {futureBookings.map((booking, index) => (
+                  <Card key={index} className="mb-2 w-75">
+                    <Card.Body>
+                      <Card.Img
+                        variant="top"
+                        src={booking.customer.avatar.url}
+                        className="rounded-circle"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          margin: "10px auto",
+                        }}
+                      />
+                      <Card.Title>{booking.customer.name}</Card.Title>
+                      <Card.Text>{booking.customer.email}</Card.Text>
+                      <Card.Text className="fw-bold">
+                        Arrives in{" "}
+                        {Math.ceil(
+                          (new Date(booking.dateFrom) - currentDate) /
+                            (1000 * 60 * 60 * 24)
+                        )}{" "}
+                        days - (Checks in on{" "}
+                        {new Date(booking.dateFrom).toLocaleDateString("nb-NO")}
+                        )
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </>
+            )}
+
+            {pastBookings.length > 0 && (
+              <>
+                <h4>Previous Bookings</h4>
+                {pastBookings.map((booking, index) => (
+                  <Card key={index} className="mb-2 w-75">
+                    <Card.Body>
+                      <Card.Img
+                        variant="top"
+                        src={booking.customer.avatar.url}
+                        className="rounded-circle"
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          margin: "10px auto",
+                        }}
+                      />
+                      <Card.Title>{booking.customer.name}</Card.Title>
+                      <Card.Text>{booking.customer.email}</Card.Text>
+                      <Card.Text className="fw-bold">
+                        Checked out{" "}
+                        {Math.floor(
+                          (currentDate - new Date(booking.dateTo)) /
+                            (1000 * 60 * 60 * 24)
+                        )}{" "}
+                        days ago - (Checked out on{" "}
+                        {new Date(booking.dateTo).toLocaleDateString("nb-NO")})
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ))}
+              </>
+            )}
+          </>
+        )}
+      </div>
+    );
+  };
+
   return (
-    <div className="container d-flex flex-row">
-      <div className="w-100  f-flex flex-row gap-3">
+    <div className="container">
+      <div className="col-12 d-flex flex-column gap-3 align-items-center justify-content-start">
         <h1>Your venues</h1>
         {venues.map((venue) => (
-          <div key={venue.id} className="d-flex flex-row">
-            <Card className="w-50 mt-2">
-              <Card.Img variant="top" src={venue.media[0].url} />
-              <Card.Body>
-                <Card.Title>{venue.name}</Card.Title>
-                <Card.Text>{venue.description}</Card.Text>
-                <Button
-                  className="buttoncolor noborder"
-                  onClick={() => handleCalendarOpen(venue)}
-                >
-                  View Calendar
-                </Button>
-              </Card.Body>
-            </Card>
-            <div />
-
-            <div className="w-50 p-4 border d-flex flex-column align-items-center rounded justify-content-start mt-2">
-              <h3>Booking status</h3>
-              {venue.bookings && venue.bookings.length > 0 ? (
-                venue.bookings.map((booking, index) => {
-                  const checkInDate = new Date(booking.dateFrom);
-                  const checkOutDate = new Date(booking.dateTo);
-                  const currentDate = new Date();
-                  const daysUntilCheckIn = Math.ceil(
-                    (checkInDate - currentDate) / (1000 * 60 * 60 * 24)
-                  );
-                  const daysUntilCheckOut = Math.ceil(
-                    (checkOutDate - currentDate) / (1000 * 60 * 60 * 24)
-                  );
-
-                  let checkOutText = "";
-                  let dateDescription = "";
-                  if (daysUntilCheckIn === 0) {
-                    checkOutText = "Checking in today";
-                    dateDescription = currentDate.toLocaleDateString("nb-NO");
-                  } else if (daysUntilCheckIn > 0) {
-                    checkOutText = `In ${daysUntilCheckIn} days`;
-                    dateDescription = checkInDate.toLocaleDateString("nb-NO");
-                  } else if (daysUntilCheckOut === 0) {
-                    checkOutText = "Checking out today";
-                    dateDescription = checkOutDate.toLocaleDateString("nb-NO");
-                  } else {
-                    checkOutText = `${daysUntilCheckOut} days ago`;
-                    dateDescription = checkOutDate.toLocaleDateString("nb-NO");
-                  }
-
-                  return (
-                    <Card key={index} className="mb-2 w-75">
-                      <Card.Body>
-                        <Card.Img
-                          variant="top"
-                          src={booking.customer.avatar.url}
-                          className="rounded-circle"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            margin: "10px auto",
-                          }}
-                        />
-                        <Card.Title>{booking.customer.name}</Card.Title>
-                        <Card.Text>{booking.customer.email}</Card.Text>
-                        <Card.Text className="fw-bold">
-                          {`${checkOutText} - (${dateDescription})`}
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  );
-                })
-              ) : (
-                <p>No guests currently in this venue.</p>
-              )}
-
-              <h3>Previous Bookings</h3>
-              {venue.bookings && venue.bookings.length > 0 ? (
-                venue.bookings.map((booking, index) => {
-                  const checkOutDate = new Date(booking.dateTo);
-                  const daysAgo = Math.floor(
-                    (new Date() - checkOutDate) / (1000 * 60 * 60 * 24)
-                  );
-                  return daysAgo > 0 ? (
-                    <Card key={index} className="mb-2 w-75">
-                      <Card.Body>
-                        <Card.Img
-                          variant="top"
-                          src={booking.customer.avatar.url}
-                          className="rounded-circle"
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            margin: "10px auto",
-                          }}
-                        />
-                        <Card.Title>{booking.customer.name}</Card.Title>
-                        <Card.Text>{booking.customer.email}</Card.Text>
-                        <Card.Text className="fw-bold">
-                          {`${daysAgo} days ago`}
-                        </Card.Text>
-                      </Card.Body>
-                    </Card>
-                  ) : null;
-                })
-              ) : (
-                <p>No previous bookings for this venue.</p>
-              )}
+          <div key={venue.id} className="d-flex flex-column">
+            <p className="fs-3">
+              Bookings for <span className="fw-bold">{venue.name}</span>{" "}
+            </p>
+            <div className="d-flex flex-column flex-md-row align-items-start justify-content-start">
+              <Card className="w-100 mt-2">
+                <Card.Img variant="top" src={venue.media[0].url} />
+                <Card.Body>
+                  <Card.Title>{venue.name}</Card.Title>
+                  <Card.Text>{venue.description}</Card.Text>
+                  <Button
+                    className="buttoncolor noborder"
+                    onClick={() => handleCalendarOpen(venue)}
+                  >
+                    View Calendar
+                  </Button>
+                </Card.Body>
+              </Card>
+              {renderBookingStatus(venue.bookings)}
             </div>
           </div>
         ))}
@@ -242,24 +289,26 @@ export function Manage() {
         <Modal.Header closeButton>
           <Modal.Title>Booking Calendar - {selectedVenue?.name}</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="d-flex">
+        <Modal.Body className="d-flex flex-column flex-md-row align-items-start justify-content-center gap-1">
           {noBookingsMessage && <p>{noBookingsMessage}</p>}
           {selectedVenue?.bookings?.length > 0 && (
-            <DatePicker
-              inline
-              selected={new Date()}
-              onChange={() => {}}
-              highlightDates={getHighlightedDates(selectedVenue)}
-              excludeDates={getBookedDates(selectedVenue)}
-            />
+            <div className="d-flex justify-content-center align-items- w-100">
+              <DatePicker
+                inline
+                selected={new Date()}
+                onChange={() => {}}
+                highlightDates={getHighlightedDates(selectedVenue)}
+                excludeDates={getBookedDates(selectedVenue)}
+              />
+            </div>
           )}
-          <div className="w-75">
+          <div className="w-100 w-md-75 ">
             {selectedVenue?.bookings?.map((booking, index) => (
               <Card
                 key={booking.id}
                 className={`mb-2 p-3 d-flex flex-row align-items-center`}
                 style={{
-                  border: `2px solid ${colors[index % colors.length]}`,
+                  border: `7px solid ${colors[index % colors.length]}`,
                 }}
               >
                 <Card.Img

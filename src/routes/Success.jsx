@@ -12,8 +12,8 @@ export function Success() {
             the details of your booking shortly. <br />
             Payment will be processed upon arrival.
           </p>
-          <Button className="btn buttoncolor rounded" href="/venues">
-            Back to Venues
+          <Button className="btn buttoncolor rounded" href="/dashboard">
+            View your bookings
           </Button>
         </div>
       </div>
