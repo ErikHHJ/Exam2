@@ -5,6 +5,9 @@ import { RenderBookings } from "../components/rendering/RenderBookings";
 export function DashBoard() {
   const [profile, setProfile] = useState(null);
   const userItem = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    document.title = "Holidaze | My Bookings";
+  }, []);
 
   const url = `https://v2.api.noroff.dev/holidaze/profiles/${userItem.name}?_bookings=true`;
 

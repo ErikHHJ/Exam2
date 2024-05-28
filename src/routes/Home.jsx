@@ -5,6 +5,9 @@ import { Button, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export function Home() {
+  useEffect(() => {
+    document.title = "Holidaze | Home";
+  }, []);
   return (
     <>
       <div

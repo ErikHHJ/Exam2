@@ -10,6 +10,9 @@ export function Register() {
   const [username, setUsername] = useState("");
 
   const [validated, setValidated] = useState(false);
+  useEffect(() => {
+    document.title = "Holidaze | Register";
+  }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();

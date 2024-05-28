@@ -17,6 +17,11 @@ export function SpecificVenue() {
         console.error("Error fetching venue:", error);
       });
   }, [url]);
+  useEffect(() => {
+    if (venue) {
+      document.title = `Holidaze | Venue: ${venue.data.name}`;
+    }
+  }, [venue]);
 
   return <RenderSpecificVenue venue={venue} />;
 }

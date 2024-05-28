@@ -1,6 +1,9 @@
 import { Button } from "react-bootstrap";
 import { IoIosCheckmark } from "react-icons/io";
 export function Success() {
+  useEffect(() => {
+    document.title = "Holidaze | Success!";
+  }, []);
   return (
     <div className=" container d-flex align-items-center justify-content-center">
       <div className="row d-flex align-items-center justify-content-center ">

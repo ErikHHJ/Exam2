@@ -72,6 +72,7 @@ export function RenderBookings({ bookings }) {
                       className="bookingimg"
                       variant="top"
                       src={booking.venue.media[0].url}
+                      alt={booking.venue.media[0].alt}
                     />
                   </Link>
 
@@ -112,6 +113,7 @@ export function RenderBookings({ bookings }) {
                     className="bookingimg"
                     variant="top"
                     src={booking.venue.media[0].url}
+                    alt={booking.venue.media[0].alt}
                   />
                 </Link>
                 <Card.Title>{booking.venue.name}</Card.Title>

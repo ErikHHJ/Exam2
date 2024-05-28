@@ -8,6 +8,9 @@ export function Login() {
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
   const [loginError, setLoginError] = useState("");
+  useEffect(() => {
+    document.title = "Holidaze | Login";
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

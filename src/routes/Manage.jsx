@@ -24,6 +24,9 @@ export function Manage() {
           "X-Noroff-API-Key": ApiKey,
         },
       };
+      useEffect(() => {
+        document.title = "Holidaze | Manage";
+      }, []);
 
       try {
         const response = await fetch(url, options);

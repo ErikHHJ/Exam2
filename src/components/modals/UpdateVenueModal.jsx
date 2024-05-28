@@ -57,32 +57,25 @@ export function UpdateVenueModal({ show, handleClose, venue }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name.startsWith("media")) {
-      const [field, index] = name.split("-");
-      const updatedMedia = [...formData.media];
-      updatedMedia[index][field] = value;
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        media: updatedMedia,
-      }));
-    } else {
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        [name]: value,
-      }));
-    }
+    const numericFields = ["price", "maxGuests", "rating", "lat", "lng"];
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: numericFields.includes(name) ? parseFloat(value) : value,
+    }));
   };
 
   const handleLocationChange = (e) => {
     const { name, value } = e.target;
+    const numericFields = ["lat", "lng"];
     setFormData((prevFormData) => ({
       ...prevFormData,
       location: {
         ...prevFormData.location,
-        [name]: value,
+        [name]: numericFields.includes(name) ? parseFloat(value) : value,
       },
     }));
   };
+
   const handleMediaChange = (index, e) => {
     const { name, value } = e.target;
     const updatedMedia = [...formData.media];

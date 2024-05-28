@@ -36,6 +36,7 @@ header {
 body {
   background-color: var(--bg-color) !important;
   font-family: "Poppins" !important;
+  color: var(--secondary-color) !important;
 }
 main {
   min-height: 100vh;

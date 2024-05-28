@@ -105,7 +105,6 @@ export function Venues() {
         }
       }
 
-      console.log("All Venues:", allVenues);
       allVenues.sort((a, b) => new Date(b.created) - new Date(a.created));
       setVenues(allVenues);
       setDisplayedVenues(
@@ -124,7 +123,9 @@ export function Venues() {
       setDisplayedVenues(venues.slice(0, itemsToShow));
     }
   }, [itemsToShow, venues, isFiltering]);
-
+  useEffect(() => {
+    document.title = "Holidaze | All venues";
+  }, []);
   useEffect(() => {
     console.log("isFiltering changed:", isFiltering);
 

@@ -4,7 +4,7 @@ import { FaXmark } from "react-icons/fa6";
 import { FcCheckmark } from "react-icons/fc";
 import { StarDisplay } from "../StarDisplay.jsx";
 import { IoIosPin } from "react-icons/io";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { BookingPicker } from "../datePickers/BookingPicker.jsx";
 
