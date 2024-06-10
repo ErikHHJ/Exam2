@@ -42,15 +42,15 @@ This site is a submission which was to be graded as the last task for the fourth
 In order to take a look at this project, the Netlify deployment link is: https://projectexam2.netlify.app/
 
 1. Clone the repo:
-    ```bash
+   ```bash
     gh repo clone ErikHHJ/Exam2
     ```
 2. Install the dependencies:
-    ```bash
+   ```bash
     npm install
     ```
 3. Then:
-    ```bash
+   ```bash
     git pull
     ```
 
@@ -71,4 +71,4 @@ Instagram: erikhjulstad
 Email: erikhhju@gmail.com
 I do not (yet) have a LinkedIn page.
 Acknowledgments
-Special thanks to the people I surveyed for the user-testing. Their feedback and the replays from Hotjar of their interaction with the website definitely improved the overall functionality and quality of the site. I have a tendency to overlook certain things, and it's very difficult to imagine myself as a user of the site when coding it myself.
+Special thanks to the people I surveyed for the user-testing. 
