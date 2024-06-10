@@ -1,6 +1,6 @@
 # Semester Project 2: Holidaze!
 
-![image](https://gyazo.com/b1f538635a41cf071e8564c2110f58c3)
+![image](https://i.gyazo.com/b1f538635a41cf071e8564c2110f58c3.jpg)
 
 This site is a submission which was to be graded as the last task for the fourth semester. In this task, I was to create a front end for a venue booking service called Holidaze.
 
